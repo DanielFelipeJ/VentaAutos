@@ -35,7 +35,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let auto of arregloAutos">
+    <tr *ngFor="let auto of listAutosFiltrados">
       <td>
         <p>
           <img *ngIf="muestraImagen" [src] = "auto.imagenUrl"
@@ -44,14 +44,16 @@
         </p>
       </td>
       <td>{{ auto.marca }}</td>
-      <td>{{ auto.modelo }}</td>
+      <td>{{ auto.modelo | lowercase | aEspacio: '-'}}</td>
       <td>{{ auto.anio }}</td>
       <td>{{ auto.color }}</td>
-      <td>{{ auto.kilometros | }}</td>
-      <td>{{ auto.precio |  }}</td>
-      <td>{{ auto.calificacion }}</td>
+      <td>{{ auto.kilometros | number }}</td>
+      <td>{{ auto.precio | currency }}</td>
+      <td><app-estrellas
+        [calificacion]="auto.calificacion"
+        (starsClick)="onClickCalification($event)"
+      >{{ auto.calificacion }}</app-estrellas></td>
     </tr>
     </tbody>
   </table>
 </div>
-
